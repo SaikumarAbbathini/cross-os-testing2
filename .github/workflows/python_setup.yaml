@@ -1,0 +1,28 @@
+name: Python Environment Setup
+
+on: [push]
+
+jobs:
+  setup-and-verify:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install pytest flake8
+
+    - name: Python version verification
+      run: python --version
+
+    - name: Flake8 check
+      run: flake8 --version
+
+    - name: Pytest check
+      run: pytest --version
